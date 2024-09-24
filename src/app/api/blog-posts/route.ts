@@ -12,3 +12,4 @@ export async function GET() {
     return NextResponse.json({ error: 'Error fetching blog posts' }, { status: 500 })
   }
 }
+//check to see GitHub is working
