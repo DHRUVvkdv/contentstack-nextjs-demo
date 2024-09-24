@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import Stack from '@/app/utils/contentstack'
+import Stack from '@/lib/contentstack'
 import { BlogPost } from '@/models/BlogPost'
 
 export async function GET() {

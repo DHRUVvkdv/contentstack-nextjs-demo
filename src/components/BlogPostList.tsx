@@ -3,13 +3,22 @@
 import { useState, useEffect } from 'react'
 import { BlogPost } from '@/models/BlogPost'
 
+// Utility function to simulate delay
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export default function BlogPostList() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchBlogPosts() {
       try {
+        setIsLoading(true)
+        
+        // Simulated delay of 2 seconds
+        // await delay(1000);
+        
         const response = await fetch('/api/blog-posts')
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -19,10 +28,16 @@ export default function BlogPostList() {
       } catch (e) {
         console.error('Error fetching blog posts:', e)
         setError('Failed to fetch blog posts. Please try again later.')
+      } finally {
+        setIsLoading(false)
       }
     }
     fetchBlogPosts()
   }, [])
+
+  if (isLoading) {
+    return <div className="text-blue-500 text-xl font-bold">Loading blog posts...</div>
+  }
 
   if (error) {
     return <div className="text-red-500">{error}</div>
