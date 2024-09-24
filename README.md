@@ -1,38 +1,71 @@
-# contentstack-nextjs-demo
+# Contentstack Next.js Demo
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This project demonstrates how to use Contentstack with Next.js 13+ and the App Router to create a simple blog post listing application.
 
-## Getting Started
+## Project Structure
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+contentstack-nextjs-demo/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── blog-posts/
+│   │   │       └── route.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   └── BlogPostList.tsx
+│   ├── lib/
+│   │   └── contentstack.ts
+│   ├── models/
+│   │   └── BlogPost.ts
+│   └── styles/
+│       └── globals.css
+├── .env.local
+├── next.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```
+   git clone https://github.com/DHRUVvkdv/contentstack-nextjs-demo.git
+   cd contentstack-nextjs-demo
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-## Learn More
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory with your Contentstack credentials:
+   ```
+   CONTENTSTACK_API_KEY=your_api_key
+   CONTENTSTACK_DELIVERY_TOKEN=your_delivery_token
+   CONTENTSTACK_ENVIRONMENT=your_environment
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Run the development server:
+   ```
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Key Components
 
-## Deploy on Vercel
+- `src/app/page.tsx`: The main page component that renders the BlogPostList.
+- `src/components/BlogPostList.tsx`: A client component that fetches and displays blog posts.
+- `src/app/api/blog-posts/route.ts`: An API route that fetches blog posts from Contentstack.
+- `src/lib/contentstack.ts`: Initializes the Contentstack SDK.
+- `src/models/BlogPost.ts`: Defines the TypeScript interface for blog posts.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How It Works
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. The main page (`page.tsx`) renders the `BlogPostList` component.
+2. `BlogPostList` makes a client-side fetch to the `/api/blog-posts` endpoint.
+3. The API route uses the Contentstack SDK to fetch blog posts from Contentstack.
+4. The fetched posts are returned to the client and rendered in the `BlogPostList` component.
